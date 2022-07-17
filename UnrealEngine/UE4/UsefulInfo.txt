@@ -34,7 +34,7 @@
 
 [===== UE4 빌드 프로세서 개수 조절하는 방법 =====]
     - 경로
-        C:\Users\ksm95\AppData\Roaming\Unreal Engine\UnrealBuildTool\BuildConfiguration.xml
+        C:\Users\ID\AppData\Roaming\Unreal Engine\UnrealBuildTool\BuildConfiguration.xml
 
     - BuildConfiguration.xml 파일에 다음과 같이 적어놓습니다.
         <xml version="1.0" encoding="utf-8" ?>

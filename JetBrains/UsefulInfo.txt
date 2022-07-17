@@ -1,0 +1,4 @@
+[===== 라이더 =====]
+    https://www.jetbrains.com/ko-kr/rider/
+    좋습니다.
+    
