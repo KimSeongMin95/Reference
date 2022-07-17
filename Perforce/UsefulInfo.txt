@@ -1,0 +1,11 @@
+[===== 주의사항 =====]
+    - .xml 파일
+        Resolve 창에서 Encoding을 UTF-8이나 UTR-8 no bom으로 변경해야 .xml이 제대로 머지됩니다.
+
+    - Merge 시 경로 수정 방식
+        개별 파일로 머지할 때 경로를 수정하는게 더 빠릅니다.
+
+    - Connection -> EnviromentSettings 수정
+        p4 set P4CLIENT=workspace
+        여기서 P4Client 설정이 중요
+
