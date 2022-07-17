@@ -1,0 +1,55 @@
+[===== UE4 Console Command 모음 =====]
+    - Display
+        DisplayAll Classname VariableName : 화면에 해당 클래스의 모든 객체들의 변수 값 띄우기
+        Set ClassName VariableName Value : 변수 값 런타임에서 수정하기
+        Display ClassObjectName VariableName : 하나의 객체의 변수 값을 런타임에 수정하기
+    - show
+        show collision : 화면에 collision 표시
+    - stat (https://docs.unrealengine.com/4.27/ko/TestingAndOptimization/PerformanceAndProfiling/StatCommands/)
+        stat unit
+        stat fps
+
+
+[===== UE4 Non Uinity Build 설정 방법 =====]
+    - 1. BuildConfigureation.xml 수정
+        <?xml version="1.0" encoding="utf-8" ?><Configuration xmlns="https://www.unrealengine.com/BuildConfiguration">
+            <BuildConfiguration>
+                <bUseUnityBuild>false</bUseUnityBuild>
+                <bUsePCHFiles>false</bUsePCHFiles>
+            </BuildConfiguration>
+        </Configuration>
+
+    - 2. MyProjectEditor.Target.cs 수정
+        public class MyProjectTarget : TargetRules
+        {
+            public MyProjectTarget(TargetInfo Target) : base(Target)
+            {
+                Type = TargetType.Game;
+
+                bUseUnityBuild = false;
+                bUsePCHFiles = false;
+            }
+        }
+
+
+[===== UE4 빌드 프로세서 개수 조절하는 방법 =====]
+    - 경로
+        C:\Users\ksm95\AppData\Roaming\Unreal Engine\UnrealBuildTool\BuildConfiguration.xml
+
+    - BuildConfiguration.xml 파일에 다음과 같이 적어놓습니다.
+        <xml version="1.0" encoding="utf-8" ?>
+        <Configuration xmlns="https://www.unrealengine.com/BuildConfiguration">
+            <BUildConfiguration>
+            </BuildConfiguration>
+            <LocalExecutor>
+                <ProcessCountMultiplier>1</ProcessCountMultiplier>
+                <MaxProcessorCount>12</MaxProcessorCount>
+            </LocalExecutor>
+            <ParallelExecutor>
+                <ProcessCountMultiplier>1</ProcessCountMultiplier>
+                <MaxProcessorCount>12</MaxProcessorCount>
+            </ParallelExecutor>
+        </Configuration>
+        그러면 12개의 프로세스만 사용합니다.
+
+

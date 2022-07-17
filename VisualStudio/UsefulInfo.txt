@@ -1,0 +1,52 @@
+[===== .pdb 로드되지 않음 문제 =====]
+    도구(Tools) -> 옵션(Options) -> 디버깅(Debugging) -> 기호(Symbols) -> + 버튼(새 위치) -> Symbol 추가 -> Synbol을 캐시할 적당한 Directory 생성 -> OK -> 각 .dll 별 로드 버튼 클릭
+
+
+[===== Build Config 너비 조절 방법 =====]
+    - 참고
+        https://stackoverflow.com/questions/32377568/can-i-change-the-width-of-the-solution-configuration-combobox-in-the-ide
+
+    - 과정
+        도구 -> 사용자 지정 -> 명령 탭 -> 도구 모음 체크 -> 표준 -> 솔루션 구성 선택 -> 선택 사항 수정 -> 너비 조절
+        
+
+[===== 디버깅 방법 =====]
+    - 프로세스 연결
+        Visual Studio를 디버깅 모드로 빌드하지 않아도 실행 중인 Unreal Editor 프로세스를 연결하여 디버깅할 수 있습니다.
+        Visual Sutido에서 [Ctrl + Alt + p] 키를 누르고, 프로세스에 연결 대화 상자를 사용하여 프로세스에 디버거를 연결합니다.
+        연결한 프로세스의 연결을 해제할 수도 있습니다.
+
+    - 빌드 시 선택적으로 해당 함수만 최적화를 끄는 방법
+        BEGIN_FUNCTION_BUILD_OPTIMIZATION
+        void AActor::Function()
+        {
+
+        }
+        END_FUNCTION_BUILD_OPTIMIZATION
+
+    - 전체 최적화 끄는 방법
+        BUild.cs에서?
+
+    - 조사식
+        중단된 상태에서 해당 변수를 우클릭하여 조사식에 추가하면 편하게 값을 확인할 수 있습니다.
+
+    - 디버깅 중에 다른 코드줄 실행 방법
+        중단점에서 if 안에 들어갈 수 없는 상황인데, 현재 화살표를 드래근 앤 드롭하여 강제로 들어가게 할 수 있습니다.
+
+
+[===== 실행 옵션 설정하기 =====]
+    프로젝트 -> MyProject 속성 -> 구성 속성 -> 디버깅 -> 명령 인수 -> "$(SolutionDir)MyProject.uproject" -skipcompile -game -log -windowed -resx=1280 -resy=720 -MyProjectGameMode=Client
+
+
+[===== Visual Assist X 사용법 =====]
+    - Visual Assist X 키보드 단축키 정리
+        https://www.wholetomato.com/learn/keyboardShortcuts?sc_lang=ko
+
+    - Visual Studio 파일에서 문자 찾기
+        Ctrl + Shift + F
+
+    - 파일 바로 찾기
+        Alt + Shift + O
+
+    - 선택한 정의 찾기
+        Alt + G / Alt + O
