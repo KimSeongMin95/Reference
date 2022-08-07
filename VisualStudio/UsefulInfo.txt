@@ -25,7 +25,7 @@
         END_FUNCTION_BUILD_OPTIMIZATION
 
     - 전체 최적화 끄는 방법
-        BUild.cs에서?
+        Build.cs에서?
 
     - 조사식
         중단된 상태에서 해당 변수를 우클릭하여 조사식에 추가하면 편하게 값을 확인할 수 있습니다.
@@ -36,6 +36,20 @@
 
 [===== 실행 옵션 설정하기 =====]
     프로젝트 -> MyProject 속성 -> 구성 속성 -> 디버깅 -> 명령 인수 -> "$(SolutionDir)MyProject.uproject" -skipcompile -game -log -windowed -resx=1280 -resy=720 -MyProjectGameMode=Client
+
+
+[===== Visual Studio에서 디버그 중단점이 적중되지 않는 문제 =====]
+    - 참고
+        https://stackoverflow.com/questions/23561687/visual-studio-modules-load-limit
+
+    - 원인
+        VisualStudio에서 Load하는 Module(pbd, dll)의 개수가 Default로 정해져 있는데, 이를 초과하여 Load하지 못하는 것입니다.
+        MaxLoad 개수를 올려주면 전부 Load하여 중단점이 적중하게 됩니다.
+
+    - 방법
+        Add this key to your registry:
+        HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager
+        DWORD DebuggerMaxModuleMsgs = 2048
 
 
 [===== Visual Assist X 사용법 =====]
@@ -50,3 +64,7 @@
 
     - 선택한 정의 찾기
         Alt + G / Alt + O
+
+    - 심볼 검색
+        Alt + Shift + S
+
