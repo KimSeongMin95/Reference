@@ -9,3 +9,8 @@
         p4 set P4CLIENT=workspace
         여기서 P4Client 설정이 중요
 
+[===== 어디까지 Revision 받았는 지 확인하는 방법 =====]
+    0. 먼저 P4CLIENT를 확인하려는 스트림으로 변경
+    1. 확인하고 싶은 폴더에서 cmd 창 생성
+    2. cmd 창에서 "p4 changes -m 1 ...#have" 입력
+    
