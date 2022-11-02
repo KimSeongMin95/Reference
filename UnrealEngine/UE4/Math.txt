@@ -1,0 +1,24 @@
+- 참고
+    https://docs.unrealengine.com/
+
+- FMath::ClosestPointOnLine
+    static FVector ClosestPointOnLine
+    (
+        const FVector & LineStart,
+        const FVector & LineEnd,
+        const FVector & Point
+    )
+    LineStart에서 LineEnd까지의 선분에서 Point에 가장 가까운 점을 찾습니다.
+
+- FMath::ClosestPointOnInfiniteLine
+    static FVector ClosestPointOnInfiniteLine
+    (
+        const FVector & LineStart,
+        const FVector & LineEnd,
+        const FVector & Point
+    )
+    Point에 가장 가까운 두 점(LineStart, LineEnd) 사이의 무한선에서 점을 찾습니다.
+
+
+
+    
