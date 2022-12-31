@@ -81,7 +81,7 @@
 
 [===== 액터의 수명 주기 =====]
     (출처: https://docs.unrealengine.com/4.27/ko/ProgrammingAndScripting/ProgrammingWithCPP/UnrealArchitecture/Actors/ActorLifecycle/)
-    
+
     <디스크에서 로드>
         1. Load From Disk
             패키지/레벨에 있는 액터가 디스크에서 로드됩니다.
@@ -193,8 +193,8 @@
             UWorld 에 방송됩니다.
         7. AActor::BeginPlay (virtual)
             플레이 시작 - 레벨이 시작되면 호출됩니다.
-        6. AActor::Tick (virtual)
-        7. AActor::EndPlay (virtual)
+        8. AActor::Tick (virtual)
+        9. AActor::EndPlay (virtual)
             액터의 수명이 막바지에 다다랐음을 보증하기 위해 여러 곳에서 호출됩니다. 
             플레이 도중에는 Destroy (소멸)이나, Level Transition (레벨 전환)이나, 
             액터가 들어있는 스트리밍 레벨이 언로드되면 이 함수가 발동됩니다.
@@ -205,9 +205,9 @@
                 액터가 들어있는 스트리밍 레벨 언로드
                 액터의 수명 만료
                 어플리케이션 종료 (모든 액터 소멸)
-        8. RF_PendingKill
-        9. ULevel::Actors에서 제거
-        10. Next GC에서 할당 해제
+        10. RF_PendingKill
+        11. ULevel::Actors에서 제거
+        12. Next GC에서 할당 해제
             오브젝트가 소멸 마킹된 이후에는, 가비지 컬렉션이 일어날 때 메모리에서 실제로 제거되어 사용중이던 리소스가 해제됩니다.
             오브젝트의 소멸 도중 호출되는 함수는 다음과 같습니다:
             10.1. UWorld::BeginDestroy (virtual)
@@ -223,5 +223,55 @@
     <디퍼드 스폰>
         1. UWorld::SpawnActorDeferred
             액터 디퍼드 스폰 - 액터의 절차적 생성을 뜻하는 것으로, 블루프린트 컨스트럭션 스크립트 이전 추가적인 구성이 가능합니다.
-        2. 이후는 스폰과 동일하나 약간 다름
+        2. AActor::PostSpawnInitialize
+        3. AActor::PostActorCreated (virtual)
+            스폰된 액터의 생성 이후에 호출됩니다.
+            생성자같은 것이 여기에 와야 합니다.
+            PostActorCreated (액터 생성 이후)는 PostLoad (로드 이후)와 상호 배제적입니다.
+        4. UGameplayStatics::FinishSpawningActor
+            액터 스폰 마무리 - 액터를 마무리시키기 위해 호출되며, SpawnActor (액터 스폰) 줄의 ExecuteConstruction (생성 실행)을 집어듭니다.
+        5. AActor::ExecuteConstruction
+            AActor::OnConstruction (virtual)
+                생성시 - 액터의 생성 지점으로, 블루프린트 액터가 컴포넌트를 만들고 블루프린트 변수를 초기화시키는 곳입니다.
+        6. AActor::PostActorConstruction 
+            액터 초기화 경로변경 - 초기화되지 않은 액터에 대해 호출됩니다
+            5.1. AActor::PreInitializeComponents (virtual)
+                컴포넌트 초기화 이전 - 액터의 컴포넌트에 InitializeComponent 를 호출하기 전 호출합니다.
+            5.2. AActor::InitializeComponents
+                컴포넌트 초기화 - 액터에 정의된 각 컴포넌트 생성용 헬퍼 함수입니다.
+            5.3. AActor::PostInitializeComponents (virtual)
+                컴포넌트 초기화 이후 - 액터의 컴포넌트 초기화 완료 후 호출됩니다.
+        7. FOnActorSpawned::OnActorSpawned
+            UWorld 에 방송됩니다.
+        8. AActor::BeginPlay (virtual)
+            플레이 시작 - 레벨이 시작되면 호출됩니다.
+        9. AActor::Tick (virtual)
+        10. AActor::EndPlay (virtual)
+            액터의 수명이 막바지에 다다랐음을 보증하기 위해 여러 곳에서 호출됩니다. 
+            플레이 도중에는 Destroy (소멸)이나, Level Transition (레벨 전환)이나, 
+            액터가 들어있는 스트리밍 레벨이 언로드되면 이 함수가 발동됩니다.
+            - EndPlay가 호출되는 경우
+                Destroy 명시적 호출
+                에디터에서 플레이 종료
+                Level Transition (심리스 트래블 또는 맵 로드)
+                액터가 들어있는 스트리밍 레벨 언로드
+                액터의 수명 만료
+                어플리케이션 종료 (모든 액터 소멸)
+        11. RF_PendingKill
+        12. ULevel::Actors에서 제거
+        13. Next GC에서 할당 해제
+            오브젝트가 소멸 마킹된 이후에는, 가비지 컬렉션이 일어날 때 메모리에서 실제로 제거되어 사용중이던 리소스가 해제됩니다.
+            오브젝트의 소멸 도중 호출되는 함수는 다음과 같습니다:
+            13.1. UWorld::BeginDestroy (virtual)
+                소멸 시작 - 여기서 오브젝트의 메모리를 해제하고 기타 (그래픽 스레드 프록시 오브젝트 등의) 멀티스레드 리소스 처리를 할 수 있습니다. 
+                소멸 예정 관련 대부분의 게임플레이 함수성은 더욱 일찍 EndPlay 에서 처리되었을 것입니다.
+            13.2. UWorld::IsReadyForFinishDestroy (virtual)
+                소멸 마무리 준비 여부 - 가비지 컬렉션 프로세스는 이 함수를 호출하여 오브젝트 할당을 영구히 해제할 준비가 되었는지 여부를 결정합니다. 
+                false 를 반환하면, 이 함수는 다음 가비지 컬렉션 패스까지 실제 오브젝트 소멸 작업을 유예시킵니다.
+            13.3. UWorld::FinishDestroy (virtual)
+                소멸 마무리 - 오브젝트가 곧 소멸되므로, 내부 데이터 구조체를 해제시킬 마지막 기회입니다. 
+                메모리 해제 이전 마지막 호출입니다.
 
+
+
+                
