@@ -272,12 +272,15 @@
                 소멸 마무리 - 오브젝트가 곧 소멸되므로, 내부 데이터 구조체를 해제시킬 마지막 기회입니다. 
                 메모리 해제 이전 마지막 호출입니다.
 
+    - 참고
+    UObject::PostInitProperties (virtual)
+        오브젝트의 프로퍼티가 초기화 될때 호출되는 함수
+    UObject::PostEditChangeProperty (virtual)
+        프로퍼티가 수정 될때 호출되는 함수
+
 
 [===== Serialization(직렬화) =====]
     참고
         https://mm5-gnap.tistory.com/359
         https://lifeisforu.tistory.com/360
-
-
-
 
