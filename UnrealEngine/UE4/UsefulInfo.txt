@@ -273,5 +273,11 @@
                 메모리 해제 이전 마지막 호출입니다.
 
 
+[===== Serialization(직렬화) =====]
+    참고
+        https://mm5-gnap.tistory.com/359
+        https://lifeisforu.tistory.com/360
 
-                
+
+
+
