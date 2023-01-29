@@ -307,8 +307,10 @@
         UseControllerDesiredRotation를 override합니다.
 
 
+[===== MODULENAME_API =====]
+    - 참고
+        https://forums.unrealengine.com/t/what-does-coreuobject-api-engine-api-macro/279675
 
-[=====  =====]
-
-
-
+    - 사용하는 이유
+        MODULENAME_API 매크로는 UBT에 의해 정의됩니다.
+        다른 모듈에서 사용할 수 있게 하려면 인라인되지 않은 모든 함수 또는 클래스에 MODULENAME_API 매크로를 사용해야 합니다.
