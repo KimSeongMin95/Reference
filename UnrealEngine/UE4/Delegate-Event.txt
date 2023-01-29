@@ -1,20 +1,23 @@
-- 참고
-    https://docs.unrealengine.com/5.1/ko/delegates-and-lamba-functions-in-unreal-engine/
+[===== Delegate =====]
+    - 참고
+        https://docs.unrealengine.com/5.1/ko/delegates-and-lamba-functions-in-unreal-engine/
 
-- Delegate
-    하나의 멤버 함수를 바인딩 시킬 수 있습니다.
+    - Delegate
+        하나의 멤버 함수를 바인딩 시킬 수 있습니다.
 
-- DynamicDelegate
-    디스크에 안전하게 Serialize 시킬 수 있습니다.
+    - DynamicDelegate
+        디스크에 안전하게 Serialize 시킬 수 있습니다.
 
-- MulticastDelegate
-    여러 멤버 함수를 바인딩 시킬 수 있습니다.
+    - MulticastDelegate
+        여러 멤버 함수를 바인딩 시킬 수 있습니다.
 
-- Event
-    MulticastDelegate와 매우 유사합니다.
-    이벤트를 선언한 클래스만이 바인딩한 함수를 호출할 수 있습니다.
+    - 주의
+        델리게이트 오브젝트는 복사해도 완벽히 안전합니다. 
+        델리게이트는 값으로 전달 가능하나 보통 추천할 만 하지는 않는데, heap 에 메모리를 할당해야 하기 때문입니다. 
+        가급적이면 델리게이트는 항상 참조 전달해야 합니다.
 
-- 주의
-    델리게이트 오브젝트는 복사해도 완벽히 안전합니다. 
-    델리게이트는 값으로 전달 가능하나 보통 추천할 만 하지는 않는데, heap 에 메모리를 할당해야 하기 때문입니다. 
-    가급적이면 델리게이트는 항상 참조 전달해야 합니다.
+
+[===== Event =====]
+    - Event
+        MulticastDelegate와 매우 유사합니다.
+        이벤트를 선언한 클래스만이 바인딩한 함수를 호출할 수 있습니다.
