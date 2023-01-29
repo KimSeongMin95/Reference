@@ -1,3 +1,11 @@
+[===== Visual Studio의 바로 가기 키 =====]
+    - 참고
+        https://learn.microsoft.com/ko-kr/visualstudio/ide/default-keyboard-shortcuts-in-visual-studio?view=vs-2022
+
+    - 선언 찾기?
+        Ctrl + T
+        
+    
 [===== .pdb 로드되지 않음 문제 =====]
     도구(Tools) -> 옵션(Options) -> 디버깅(Debugging) -> 기호(Symbols) -> + 버튼(새 위치) -> Symbol 추가 -> Synbol을 캐시할 적당한 Directory 생성 -> OK -> 각 .dll 별 로드 버튼 클릭
 
