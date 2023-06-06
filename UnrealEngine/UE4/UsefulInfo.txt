@@ -1,3 +1,16 @@
+[===== 기본 특징 =====]
+    - 왼손 좌표계 (시계 방향으로 회전)
+        Forward: x축
+        Right: y축
+        Up: z축
+    - Transform 행렬 연산 순서
+        SRT = Scale -> Rotation -> Translation
+    - 오일러 각의 회전 순서
+        Roll -> Pitch -> Yaw
+    - 행 기준 방식의 행렬 설계
+        벡터가 왼쪽, 행렬이 오른쪽
+
+
 [===== UE4 Console Command 모음 =====]
     - Display
         DisplayAll ClassName VariableName : 화면에 해당 클래스의 모든 객체들의 변수 값 띄우기
